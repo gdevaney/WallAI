@@ -1,4 +1,3 @@
----
 layout: default
 title: WallAI - CS6473 Computer Vision Project
 show_downloads: false
