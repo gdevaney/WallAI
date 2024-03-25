@@ -1,0 +1,10 @@
+title: WallAI - CS6473 Computer Vision Project
+#description: Cayman is a clean, responsive theme for GitHub Pages.
+show_downloads: false
+google_analytics:
+theme: jekyll-theme-cayman
+exclude:
+  - Data
+  - "*.ipynb"
+  - "*.py
+  - README.md
