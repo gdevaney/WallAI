@@ -1,123 +1,32 @@
----
 layout: default
+title: WallAI - CS6473 Computer Vision Project
+show_downloads: false
+description: Image Segmentation and Recoloration
 ---
 
-Text can be **bold**, _italic_, or ~~strikethrough~~.
 
-[Link to another page](./another-page.html).
+# Introduction/Problem Definition
+ProjectColor is an application made by Home Depot that allows users to visualize different paint colors after they take a picture of their room. The Home Depot app has some difficulty detecting edges and assigning appropriate pixels to what it defines as “walls”. The application also has difficulty detecting light exposure and applying appropriate color transformations (the example below likely does not translate to what the color would actually look like on the wall). We will attempt to solve these problems using Machine Learning and Computer Vision techniques.
 
-There should be whitespace between paragraphs.
+# Related Works
+- “Home Staging Using Machine Learning Techniques” by Marti Grau Gasulla
+  - This research paper discussed using style transfer and other deep learning techniques to modify the style of different bathroom images while retaining objects in the room.
+- “SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation” by Vijay Badrinarayanan, Alex Kendall, and Roberto Cipolla
+  - This research paper details a deep, fully convolutional neural network called SegNet that performs pixel-wise segmentation of images.
+- “Computer vision based room interior design” by Nasir Ahmad
+  - This paper is the first attempt at using computer vision for interior design. The paper approaches the problem through image segmentation, color assignment, and post-processing.
+- “A transfer learning approach for indoor object identification” by Mouna Afif
+  - This paper discusses using transfer learning techniques and deep convolutional neural networks for detecting with a big performance three categories of indoor objects (door, stair, and sign). This paper may aid us in how indoor objects/furniture might be different from regular object recognition, and help us with our project.
+- “What’s in my Room? Object Recognition on Indoor Panoramic Images” by Julia Guerrero-Viu
+  - This research paper proposes deep learning-based methods for conducting object recognition in images that may contain distortions from 360-degree panoramic images.
+- “Fast R-CNN” by Ross Girshick
+  - This research paper proposes a Fast Region-based Convolutional Network method for object detection. While CNN has been known to perform well in object detection, Fast R-CNN’s speed and accuracy stand out from previous methods like R-CNN.
 
-There should be whitespace between paragraphs. We recommend including a README, or a file with information about your project.
+# Methods/Approach
+The following sections describe each method and our particular implementation.
 
-# Header 1
+# Experiments/Results
 
-This is a normal paragraph following a header. GitHub is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere.
+# What's Next
 
-## Header 2
-
-> This is a blockquote following a header.
->
-> When something is important enough, you do it even if the odds are not in your favor.
-
-### Header 3
-
-```js
-// Javascript code with syntax highlighting.
-var fun = function lang(l) {
-  dateformat.i18n = require('./lang/' + l)
-  return true;
-}
-```
-
-```ruby
-# Ruby code with syntax highlighting
-GitHubPages::Dependencies.gems.each do |gem, version|
-  s.add_dependency(gem, "= #{version}")
-end
-```
-
-#### Header 4
-
-*   This is an unordered list following a header.
-*   This is an unordered list following a header.
-*   This is an unordered list following a header.
-
-##### Header 5
-
-1.  This is an ordered list following a header.
-2.  This is an ordered list following a header.
-3.  This is an ordered list following a header.
-
-###### Header 6
-
-| head1        | head two          | three |
-|:-------------|:------------------|:------|
-| ok           | good swedish fish | nice  |
-| out of stock | good and plenty   | nice  |
-| ok           | good `oreos`      | hmm   |
-| ok           | good `zoute` drop | yumm  |
-
-### There's a horizontal rule below this.
-
-* * *
-
-### Here is an unordered list:
-
-*   Item foo
-*   Item bar
-*   Item baz
-*   Item zip
-
-### And an ordered list:
-
-1.  Item one
-1.  Item two
-1.  Item three
-1.  Item four
-
-### And a nested list:
-
-- level 1 item
-  - level 2 item
-  - level 2 item
-    - level 3 item
-    - level 3 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-  - level 2 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-- level 1 item
-
-### Small image
-
-![Octocat](https://github.githubassets.com/images/icons/emoji/octocat.png)
-
-### Large image
-
-![Branching](https://guides.github.com/activities/hello-world/branching.png)
-
-
-### Definition lists can be used with HTML syntax.
-
-<dl>
-<dt>Name</dt>
-<dd>Godzilla</dd>
-<dt>Born</dt>
-<dd>1952</dd>
-<dt>Birthplace</dt>
-<dd>Japan</dd>
-<dt>Color</dt>
-<dd>Green</dd>
-</dl>
-
-```
-Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
-```
-
-```
-The final element.
-```
+# Team Member Contributions
