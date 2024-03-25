@@ -1,5 +1,7 @@
 ---
 layout: default
+title: WallAI - CS6473 Computer Vision Project
+description: Image Segmentation and Recoloration
 ---
 
 
