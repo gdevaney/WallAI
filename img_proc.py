@@ -81,4 +81,4 @@ def changeColor(image_name, position, new_color):
 images = glob.glob('Data/Test/*.jpg')
 
 for img in images: 
-    changeColor(img, (10,20), [105, 149, 173])
+    changeColor(img, (10,20), [111, 209, 201])
