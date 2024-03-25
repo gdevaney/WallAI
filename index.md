@@ -32,3 +32,5 @@ The following sections describe each method and our particular implementation.
 # What's Next
 
 # Team Member Contributions
+
+Make a checklist
