@@ -27,6 +27,8 @@ The following sections describe each method and our particular implementation.
 
 # Experiments/Results
 
+<img src="{{site.baseurl}}/assets/images/bedroom1.png" width="48%"/>
+
 # What's Next
 
 # Team Member Contributions
