@@ -3,7 +3,7 @@ https://github.gatech.edu/pages/gdevaney3/WallAI/
 
 # How to add images:
  - Add images to assets/images folder
- - type <img src="{{site.baseurl}}/assets/images/<img_name>.png" width="48%"/> in index.md file
+ - type '<img src="{{site.baseurl}}/assets/images/<img_name>.png" width="48%"/>' in index.md file
 
 
 # The Cayman theme
