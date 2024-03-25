@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 import glob
+import matplotlib.pyplot as plt
 
 def readImage(img_name):
     img = cv2.imread(img_name)
@@ -66,8 +67,8 @@ def mergeImages(img, colored_image, wall):
 
 def saveImage(img_name, img):
     img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
-    img_name= img_name[5:]
-    cv2.imwrite( "Edit/" + img_name, img)
+    img_name= img_name[10:]
+    cv2.imwrite("./CV2Edited/" + img_name, img)
 
 def changeColor(image_name, position, new_color):
     img = readImage(image_name)
