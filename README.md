@@ -5,6 +5,7 @@ https://github.gatech.edu/pages/gdevaney3/WallAI/
  - Add images to assets/images folder
  - type \<img src="{{site.baseurl}}/assets/images/<img_name>.png" width="48%"/\> in index.md file
 
+--- Cayman Theme Instructions ---
 
 # The Cayman theme
 
