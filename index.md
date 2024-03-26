@@ -55,11 +55,15 @@ Lastly, we propose to make use of only a subset of ADE20K indoor images to fine-
 
 # Experiments/Results
 
-- Result using pre-trained model from Zhou\
-<img src="{{site.baseurl}}/assets/images/Screenshot 2024-03-26 at 00.04.52.png" width="50%"/>
+- Home Depot baseline\
+<img src="{{site.baseurl}}/assets/images/hd_recolor1.jpg" width="50%"/>
+
 
 - Result using OpenCV modules\
 <img src="{{site.baseurl}}/assets/images/opencv_test.jpg" width="50%"/>
+
+- Result using pre-trained model from Zhou\
+<img src="{{site.baseurl}}/assets/images/Screenshot 2024-03-26 at 00.04.52.png" width="50%"/>
 
 
 # What's Next
@@ -67,6 +71,8 @@ Lastly, we propose to make use of only a subset of ADE20K indoor images to fine-
 - We want to investigate whether conducting fine-tuning with a subset of the dataset from ADE20K, with only wall annotation, can improve the performance of the models (April 10th)
 
 - We plan to explore unsupervised semantic segmentation models like Hamilton's work [6], to see if this model can be modified to identify walls more efficiently and accurately. First, we would have to read the paper to evaluate the feasibility of this model (April 20th).
+
+- We will evaluate model performance using both quantitative (Mean Intersection over Union) and qualitative (human interpretation) metrics. 
 
 
 # Team Member Contributions
