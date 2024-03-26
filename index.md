@@ -33,9 +33,10 @@ different pyramid scales, where the highest level captures the global context, w
 # Methods/Approach
 
 ### Home Depot Model
-Our baseline model is using ...
+The Home Depot model is proprietary, so we are unable to understand what is used under the hood. However, we will use this as a baseline for scoring our models. Quantitatively, we will use Mean Intersection over Union to compare our outputs to Home Depot's using a similarity metric. Then, we will use human interpretation to score the best model against Home Depot's model qualitatively on three metrics: segmentation, edge accuracy, and coloration. 
 
-### CV2 Module
+### OpenCV Module
+OpenCV has a number of edge detection and masking modules that can be used for filtering objects in images [5]. We used techniques outlined in Garga's work to input an image and a color of choice, apply a masking technique using interpolation, a Canny edge detector, and several OpenCV modules to identify the wall, and edit the HSV color space to recolor wall segments while preserving natural light. The OpenCV approach performed well at handling various light intensities, but struggled to identify and segment walls with deep shadows and fine details. Therefore, we wanted to explore techniques using semantic segmentation and potentially combine the two approaches to create our final product. 
 
 ### Semantic Segmentation CNN Models
 Semantic Segmentation is a computer vision task that assigns a semantic label to each partitioned segment.
@@ -43,7 +44,7 @@ Unlike instance segmentation, where the goal is to differentiate between individ
 The primary objective of semantic segmentation is to understand the content of the image at the pixel level, enabling machines to interpret the scene with a higher level of understanding.
 
 We propose to utilize semantic segmentation models to distinguish walls within our dataset and subsequently color the walls.
-We integrate a pre-trained model from Zhou's work [3]: ResNET50Dilated [5] as the encoder and PPM-Deepsup as the decoder of the semantic segmentation model, which is widely used as a starting point for evaluating deep learning semantic segmentation models.
+We integrate a pre-trained model from Zhou's work [3]: ResNET50Dilated [6] as the encoder and PPM-Deepsup as the decoder of the semantic segmentation model, which is widely used as a starting point for evaluating deep learning semantic segmentation models.
 
 The next model we try is using PSPNet to identify just the walls.
 The model would use ResNet50, a 50-layer convolutional neural network (CNN), for encoding and pyramid scheme parsing network for decoding, which exploits global context information by different-region-based context aggregation.
@@ -79,6 +80,8 @@ Make a checklist
 
 [4] X. Q. X. W. J. J. Hengshuang Zhao, Jianping Shi, “Pyramid scene parsing network,” in 2017 IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2016.
 
-[5] K. He, X. Zhang, S. Ren, and J. Sun, “Deep Residual Learning for Image Recognition,” in Proceedings of 2016 IEEE Conference on Computer Vision and Pattern Recognition, ser. CVPR ’16. IEEE, Jun. 2016, pp. 770–778. [Online]. Available: http://ieeexplore.ieee.org/document/7780459
+[5] S. Garga, “UC HACK 20: Detect Wall from the Image and Change Its Colour or Apply Various Patterns,” GitHub, 2020. 
 
-[6] M. Hamilton, Z. Zhang, B. Hariharan, N. Snavely, and W. T. Freeman, “Unsupervised semantic segmentation by distilling feature correspondences,” in International Conference on Learning Representations, 2022. [Online]. Available: https://openreview.net/forum?id=SaKO6z6Hl0c
+[6] K. He, X. Zhang, S. Ren, and J. Sun, “Deep Residual Learning for Image Recognition,” in Proceedings of 2016 IEEE Conference on Computer Vision and Pattern Recognition, ser. CVPR ’16. IEEE, Jun. 2016, pp. 770–778. [Online]. Available: http://ieeexplore.ieee.org/document/7780459
+
+[7] M. Hamilton, Z. Zhang, B. Hariharan, N. Snavely, and W. T. Freeman, “Unsupervised semantic segmentation by distilling feature correspondences,” in International Conference on Learning Representations, 2022. [Online]. Available: https://openreview.net/forum?id=SaKO6z6Hl0c
