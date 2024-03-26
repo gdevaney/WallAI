@@ -31,13 +31,31 @@ There were previous attempts at scene parsing that could be applied to detecting
 different pyramid scales, where the highest level captures the global context, while the lowest level captures more fine-grained context. This context-aware model takes into consideration what objects are associated with which, e.g. boat is the object usually associated with water, not a car. Similarly, PSPNet could be used to take into consideration that a wall is an object that is to be associated indoors.
 
 # Methods/Approach
-The following sections describe each method and our particular implementation.
+
+### Home Depot Model
+Our baseline model is using ...
+
+### CV2 Module
+
+### Semantic Segmentation CNN Models
+Semantic Segmentation is a computer vision task that assigns a semantic label to each partitioned segment.
+Unlike instance segmentation, where the goal is to differentiate between individual object instances, semantic segmentation focuses on categorizing each pixel in the image into meaningful classes, such as road, sky, person, car, or wall.
+The primary objective of semantic segmentation is to understand the content of the image at the pixel level, enabling machines to interpret the scene with a higher level of understanding.
+
+We propose to utilize semantic segmentation models to distinguish walls within our dataset and subsequently color the walls.
+We integrate a pre-trained model from Zhou's work \cite{zhou2018semantic}: ResNET50Dilated \cite{he2016residual} as the encoder and PPM-Deepsup as the decoder of the semantic segmentation model.
+This model is widely used as a starting point for evaluating deep learning semantic segmentation models.
+Then, we propose to make use of only a subset of ADE20K indoor images to train smaller semantic segmentation models and test the Mean Intersection of the Union area (IoU).
+
+The next model we try is using PSPNet to identify the walls. The model would use ResNet50, a 50-layer convolutional neural network (CNN), for encoding and pyramid scheme parsing network for decoding, which exploits global context information by different-region-based context aggregation. We decided on this model because ResNet is great for semantic segmentation, and pyramid scheme parsing network is great for identifying the object at different scale: taking in a global context of the image at a highest level to deduce the object relation to one another within an image, and also taking in more fine-grained context at continuously lower levels. We believed this model would be great for our use case since walls are only present within an indoor image, and there most likely is a piece of furniture or a bed next to a wall.
 
 # Experiments/Results
 
 <img src="{{site.baseurl}}/assets/images/bedroom1.png" width="48%"/>
 
 # What's Next
+
+
 
 # Team Member Contributions
 
