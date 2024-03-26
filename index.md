@@ -59,7 +59,7 @@ Lastly, we propose to make use of only a subset of ADE20K indoor images to fine-
 
 - We want to investigate whether conducting fine-tuning with a subset of the dataset from ADE20K, with only wall annotation, can improve the performance of the models (April 10th)
 
-- We plan to explore unsupervised semantic segmentation models like Hamilton's work \cite{hamilton2022unsupervised}, to see if this model can be modified to identify walls more efficiently and accurately. First, we would have to read the paper to evaluate the feasibility of this model (April 20th).
+- We plan to explore unsupervised semantic segmentation models like Hamilton's work [6], to see if this model can be modified to identify walls more efficiently and accurately. First, we would have to read the paper to evaluate the feasibility of this model (April 20th).
 
 
 # Team Member Contributions
