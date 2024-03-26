@@ -16,18 +16,18 @@ In order to train and test our models, we used the Large-scale Scene Understandi
 <img src="{{site.baseurl}}/assets/images/bedroom_example.jpg" width="50%"/>
 
 # Related Works
-In computer vision, the utilization of large-scale datasets like ImageNet \cite{imagenet} and Pascal \cite{pascal} has been instrumental in propelling the field forward.
-ImageNet consists of millions of labeled images across thousands of categories, pivotal in advancing computer vision research by providing benchmarks for evaluating algorithms in tasks such as image classification and object segmentation \cite{imagenet}.
-Pascal Visual Object Classes dataset, while smaller compared to ImageNet, has played a significant role in the development of object detection and segmentation algorithms \cite{pascal}.
+In computer vision, the utilization of large-scale datasets like ImageNet [1] and Pascal [2] has been instrumental in propelling the field forward.
+ImageNet consists of millions of labeled images across thousands of categories, pivotal in advancing computer vision research by providing benchmarks for evaluating algorithms in tasks such as image classification and object segmentation [1].
+Pascal Visual Object Classes dataset, while smaller compared to ImageNet, has played a significant role in the development of object detection and segmentation algorithms [2].
 Pascal offers a diverse set of images annotated with object bounding boxes and segmentation masks across 20 different object categories.
 However, it is noteworthy that these datasets predominantly contain annotations at the image level or offer bounding box delineations around objects, rendering them somewhat less conducive to segmentation tasks.
 
-In response to this limitation, Zhou constructs an ADE20K: a dataset with pictures that are labeled on every pixel by one expert annotator \cite{zhou2018semantic}.
+In response to this limitation, Zhou constructs an ADE20K: a dataset with pictures that are labeled on every pixel by one expert annotator [3].
 This meticulous annotation scheme allowed for the diversity of the labels within the image while maintaining the consistency of the annotation.
 On average, the annotator labeled 29 different segments per image, labeling discrete objects with well-defined shapes, background regions, or object parts.
 Zhou also establishes a benchmark for scene parsing tasks by utilizing ADE20K.
 
-There were previous attempts at scene parsing that could be applied to detecting walls: pyramid scheme parsing network \cite{pspnet}. This network uses ResNet to get features and then uses a pyramid pooling module as a decoder. The pyramid pooling module fuses features under four
+There were previous attempts at scene parsing that could be applied to detecting walls: pyramid scheme parsing network [4]. This network uses ResNet to get features and then uses a pyramid pooling module as a decoder. The pyramid pooling module fuses features under four
 different pyramid scales, where the highest level captures the global context, while the lowest level captures more fine-grained context. This context-aware model takes into consideration what objects are associated with which, e.g. boat is the object usually associated with water, not a car. Similarly, PSPNet could be used to take into consideration that a wall is an object that is to be associated indoors.
 
 # Methods/Approach
@@ -43,11 +43,13 @@ Unlike instance segmentation, where the goal is to differentiate between individ
 The primary objective of semantic segmentation is to understand the content of the image at the pixel level, enabling machines to interpret the scene with a higher level of understanding.
 
 We propose to utilize semantic segmentation models to distinguish walls within our dataset and subsequently color the walls.
-We integrate a pre-trained model from Zhou's work \cite{zhou2018semantic}: ResNET50Dilated \cite{he2016residual} as the encoder and PPM-Deepsup as the decoder of the semantic segmentation model.
+We integrate a pre-trained model from Zhou's work [3]: ResNET50Dilated [5] as the encoder and PPM-Deepsup as the decoder of the semantic segmentation model.
 This model is widely used as a starting point for evaluating deep learning semantic segmentation models.
-Then, we propose to make use of only a subset of ADE20K indoor images to train smaller semantic segmentation models and test the Mean Intersection of the Union area (IoU).
+The next model we try is using PSPNet to identify just the walls. The model would use ResNet50, a 50-layer convolutional neural network (CNN), for encoding and pyramid scheme parsing network for decoding, which exploits global context information by different-region-based context aggregation.
+We decided on this model because ResNet is great for semantic segmentation, and pyramid scheme parsing network is great for identifying the object at different scale: taking in a global context of the image at a highest level to deduce the object relation to one another within an image, and also taking in more fine-grained context at continuously lower levels.
+We believed this model would be great for our use case since walls are only present within an indoor image, and there most likely is a piece of furniture or a bed next to a wall.
+Lastly, we propose to make use of only a subset of ADE20K indoor images to fine-tune smaller semantic segmentation models and test the Mean Intersection of the Union area (IoU) using the ground truth from ADE20K images.
 
-The next model we try is using PSPNet to identify the walls. The model would use ResNet50, a 50-layer convolutional neural network (CNN), for encoding and pyramid scheme parsing network for decoding, which exploits global context information by different-region-based context aggregation. We decided on this model because ResNet is great for semantic segmentation, and pyramid scheme parsing network is great for identifying the object at different scale: taking in a global context of the image at a highest level to deduce the object relation to one another within an image, and also taking in more fine-grained context at continuously lower levels. We believed this model would be great for our use case since walls are only present within an indoor image, and there most likely is a piece of furniture or a bed next to a wall.
 
 # Experiments/Results
 
@@ -55,12 +57,14 @@ The next model we try is using PSPNet to identify the walls. The model would use
 
 # What's Next
 
+- We want to investigate whether conducting fine-tuning with a subset of the dataset from ADE20K, with only wall annotation, can improve the performance of the models (April 10th)
+
+- We plan to explore unsupervised semantic segmentation models like Hamilton's work \cite{hamilton2022unsupervised}, to see if this model can be modified to identify walls more efficiently and accurately. First, we would have to read the paper to evaluate the feasibility of this model (April 20th).
 
 
 # Team Member Contributions
 
 Make a checklist
-
 
 # References
 
