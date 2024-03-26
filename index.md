@@ -15,6 +15,8 @@ In order to train and test our models, we used the Large-scale Scene Understandi
 
 <img src="{{site.baseurl}}/assets/images/bedroom_example.jpg" width="50%"/>
 
+Using the training data, image segmentation models, and edge detection techniques, we will craft a solution that will hopefully outperform Home Depot in wall detection and recoloration.
+
 # Related Works
 In computer vision, the utilization of large-scale datasets like ImageNet [1] and Pascal [2] has been instrumental in propelling the field forward.
 ImageNet consists of millions of labeled images across thousands of categories, pivotal in advancing computer vision research by providing benchmarks for evaluating algorithms in tasks such as image classification and object segmentation [1].
@@ -33,7 +35,7 @@ different pyramid scales, where the highest level captures the global context, w
 # Methods/Approach
 
 ### Home Depot Model
-The Home Depot model is proprietary, so we are unable to understand what is used under the hood. However, we will use this as a baseline for scoring our models. Quantitatively, we will use Mean Intersection over Union to compare our outputs to Home Depot's using a similarity metric. Then, we will use human interpretation to score the best model against Home Depot's model qualitatively on three metrics: segmentation, edge accuracy, and coloration. 
+The Home Depot model is proprietary, so we are unable to understand what is used under the hood. However, we will use this as a baseline for scoring our models. Quantitatively, we will use Mean Intersection over Union to compare our outputs to Home Depot's using a similarity metric. Then, we will use human interpretation to score the best model against Home Depot's model qualitatively on three metrics: segmentation, edge detection, and coloration. 
 
 ### OpenCV Module
 OpenCV has a number of edge detection and masking modules that can be used for filtering objects in images [5]. We used techniques outlined in Garga's work to input an image and a color of choice, apply a masking technique using interpolation, a Canny edge detector, and several OpenCV modules to identify the wall, and edit the HSV color space to recolor wall segments while preserving natural light. The OpenCV approach performed well at handling various light intensities, but struggled to identify and segment walls with deep shadows and fine details. Therefore, we wanted to explore techniques using semantic segmentation and potentially combine the two approaches to create our final product. 
@@ -54,10 +56,10 @@ Lastly, we propose to make use of only a subset of ADE20K indoor images to fine-
 
 
 # Experiments/Results
+During experimentation, we attempted 3 methods and used the Home Depot output as a baseline. Using the 3 qualitative metrics outlined above on one particular instance shown below, Zhou's model perfoms best in segmentation, and OpenCV performs best at edge detection and coloration. While our baseline didn't perform best at any one category, it combined accurate coloration with segmentation and object detection, unlike the OpenCV. We experimented with thresholding the Canny edge detector and found that a large threshold range (50,200) outperformed a smaller range. The quality of images taken by consumers varies, and using a large threshold range forces the model to be picky choosing pixels in the edge map, yet generous to pixels connected to those in the edge map. We hope to effectively combine this technique with image segmentation models in future experiments. 
 
 - Home Depot baseline\
 <img src="{{site.baseurl}}/assets/images/hd_recolor1.jpg" width="50%"/>
-
 
 - Result using OpenCV modules\
 <img src="{{site.baseurl}}/assets/images/opencv_test.jpg" width="50%"/>
@@ -70,17 +72,25 @@ Lastly, we propose to make use of only a subset of ADE20K indoor images to fine-
 
 
 # What's Next
-
 - We want to investigate whether conducting fine-tuning with a subset of the dataset from ADE20K, with only wall annotation, can improve the performance of the models (April 10th)
 
-- We plan to explore unsupervised semantic segmentation models like Hamilton's work [6], to see if this model can be modified to identify walls more efficiently and accurately. First, we would have to read the paper to evaluate the feasibility of this model (April 20th).
+- We will evaluate model performance using both quantitative (Mean Intersection over Union) and qualitative (human interpretation) metrics. The Home Depot wall recoloration will be used as the baseline for quantitative metrics, and we will compare our best model to Home Depot's output using a qualitative approach (April 10th)
 
-- We will evaluate model performance using both quantitative (Mean Intersection over Union) and qualitative (human interpretation) metrics. 
-
+- We plan to explore unsupervised semantic segmentation models like Hamilton's work [6], to see if this model can be modified to identify walls more efficiently and accurately. First, we would have to read the paper to evaluate the feasibility of this model (April 20th)
 
 # Team Member Contributions
 
-Make a checklist
+- Jongyoon Choi
+  - Explore unsupervised semantic segmentation models
+  - Conduct unbiased survey using qualitative metrics
+
+- Garrett Devaney
+  - Evaluate model performance by creating quantitative measures (MIoU)
+  - Fine tune output from semantic segmentation models using edge detector
+
+- Michael Yu
+  - Conduct fine-tuning of ADE20K with only wall annotation
+  - Explore utilizing U-Net architecture on aggregated training set 
 
 # References
 
