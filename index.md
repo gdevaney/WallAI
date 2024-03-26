@@ -54,6 +54,7 @@ Lastly, we propose to make use of only a subset of ADE20K indoor images to fine-
 
 # Experiments/Results
 
+- Result using pre-trained model from Zhou
 <img src="{{site.baseurl}}/assets/images/Screenshot 2024-03-26 at 00.04.52.png" width="50%"/>
 
 
