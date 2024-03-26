@@ -10,7 +10,6 @@ ProjectColor is an application made by Home Depot that allows users to visualize
 
 <img src="{{site.baseurl}}/assets/images/hd_example.png" width="80%"/>
 
-We are using data scraped from the LS
 
 # Related Works
 - “Home Staging Using Machine Learning Techniques” by Marti Grau Gasulla
