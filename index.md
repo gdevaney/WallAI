@@ -59,7 +59,7 @@ Lastly, we propose to make use of only a subset of ADE20K indoor images to fine-
 <img src="{{site.baseurl}}/assets/images/Screenshot 2024-03-26 at 00.04.52.png" width="50%"/>
 
 - Result using OpenCV modules\
-<img src="{{site.baseurl}}/assets/images/opencv_test.png" width="50%"/>
+<img src="{{site.baseurl}}/assets/images/opencv_test.jpg" width="50%"/>
 
 
 # What's Next
