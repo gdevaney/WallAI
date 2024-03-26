@@ -16,18 +16,19 @@ In order to train and test our models, we used the Large-scale Scene Understandi
 <img src="{{site.baseurl}}/assets/images/bedroom_example.jpg" width="50%"/>
 
 # Related Works
-- “Home Staging Using Machine Learning Techniques” by Marti Grau Gasulla
-  - This research paper discussed using style transfer and other deep learning techniques to modify the style of different bathroom images while retaining objects in the room.
-- “SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation” by Vijay Badrinarayanan, Alex Kendall, and Roberto Cipolla
-  - This research paper details a deep, fully convolutional neural network called SegNet that performs pixel-wise segmentation of images.
-- “Computer vision based room interior design” by Nasir Ahmad
-  - This paper is the first attempt at using computer vision for interior design. The paper approaches the problem through image segmentation, color assignment, and post-processing.
-- “A transfer learning approach for indoor object identification” by Mouna Afif
-  - This paper discusses using transfer learning techniques and deep convolutional neural networks for detecting with a big performance three categories of indoor objects (door, stair, and sign). This paper may aid us in how indoor objects/furniture might be different from regular object recognition, and help us with our project.
-- “What’s in my Room? Object Recognition on Indoor Panoramic Images” by Julia Guerrero-Viu
-  - This research paper proposes deep learning-based methods for conducting object recognition in images that may contain distortions from 360-degree panoramic images.
-- “Fast R-CNN” by Ross Girshick
-  - This research paper proposes a Fast Region-based Convolutional Network method for object detection. While CNN has been known to perform well in object detection, Fast R-CNN’s speed and accuracy stand out from previous methods like R-CNN.
+In computer vision, the utilization of large-scale datasets like ImageNet \cite{imagenet} and Pascal \cite{pascal} has been instrumental in propelling the field forward.
+ImageNet consists of millions of labeled images across thousands of categories, pivotal in advancing computer vision research by providing benchmarks for evaluating algorithms in tasks such as image classification and object segmentation \cite{imagenet}.
+Pascal Visual Object Classes dataset, while smaller compared to ImageNet, has played a significant role in the development of object detection and segmentation algorithms \cite{pascal}.
+Pascal offers a diverse set of images annotated with object bounding boxes and segmentation masks across 20 different object categories.
+However, it is noteworthy that these datasets predominantly contain annotations at the image level or offer bounding box delineations around objects, rendering them somewhat less conducive to segmentation tasks.
+
+In response to this limitation, Zhou constructs an ADE20K: a dataset with pictures that are labeled on every pixel by one expert annotator \cite{zhou2018semantic}.
+This meticulous annotation scheme allowed for the diversity of the labels within the image while maintaining the consistency of the annotation.
+On average, the annotator labeled 29 different segments per image, labeling discrete objects with well-defined shapes, background regions, or object parts.
+Zhou also establishes a benchmark for scene parsing tasks by utilizing ADE20K.
+
+There were previous attempts at scene parsing that could be applied to detecting walls: pyramid scheme parsing network \cite{pspnet}. This network uses ResNet to get features and then uses a pyramid pooling module as a decoder. The pyramid pooling module fuses features under four
+different pyramid scales, where the highest level captures the global context, while the lowest level captures more fine-grained context. This context-aware model takes into consideration what objects are associated with which, e.g. boat is the object usually associated with water, not a car. Similarly, PSPNet could be used to take into consideration that a wall is an object that is to be associated indoors.
 
 # Methods/Approach
 The following sections describe each method and our particular implementation.
