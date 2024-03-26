@@ -43,9 +43,10 @@ Unlike instance segmentation, where the goal is to differentiate between individ
 The primary objective of semantic segmentation is to understand the content of the image at the pixel level, enabling machines to interpret the scene with a higher level of understanding.
 
 We propose to utilize semantic segmentation models to distinguish walls within our dataset and subsequently color the walls.
-We integrate a pre-trained model from Zhou's work [3]: ResNET50Dilated [5] as the encoder and PPM-Deepsup as the decoder of the semantic segmentation model.
-This model is widely used as a starting point for evaluating deep learning semantic segmentation models.
-The next model we try is using PSPNet to identify just the walls. The model would use ResNet50, a 50-layer convolutional neural network (CNN), for encoding and pyramid scheme parsing network for decoding, which exploits global context information by different-region-based context aggregation.
+We integrate a pre-trained model from Zhou's work [3]: ResNET50Dilated [5] as the encoder and PPM-Deepsup as the decoder of the semantic segmentation model, which is widely used as a starting point for evaluating deep learning semantic segmentation models.
+
+The next model we try is using PSPNet to identify just the walls.
+The model would use ResNet50, a 50-layer convolutional neural network (CNN), for encoding and pyramid scheme parsing network for decoding, which exploits global context information by different-region-based context aggregation.
 We decided on this model because ResNet is great for semantic segmentation, and pyramid scheme parsing network is great for identifying the object at different scale: taking in a global context of the image at a highest level to deduce the object relation to one another within an image, and also taking in more fine-grained context at continuously lower levels.
 We believed this model would be great for our use case since walls are only present within an indoor image, and there most likely is a piece of furniture or a bed next to a wall.
 Lastly, we propose to make use of only a subset of ADE20K indoor images to fine-tune smaller semantic segmentation models and test the Mean Intersection of the Union area (IoU) using the ground truth from ADE20K images.
