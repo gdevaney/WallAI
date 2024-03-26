@@ -88,7 +88,7 @@ During experimentation, we attempted 3 methods and used the Home Depot output as
   - Evaluate model performance by creating quantitative measures (MIoU)
   - Fine tune output from semantic segmentation models using edge detector
 
-- Michael Yu
+- Jeongrok Yu
   - Conduct fine-tuning of ADE20K with only wall annotation
   - Explore utilizing U-Net architecture on aggregated training set 
 
