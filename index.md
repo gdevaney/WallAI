@@ -54,7 +54,6 @@ Lastly, we propose to make use of only a subset of ADE20K indoor images to fine-
 
 # Experiments/Results
 
-<img src="{{site.baseurl}}/assets/images/bedroom1.png" width="48%"/>
 
 # What's Next
 
