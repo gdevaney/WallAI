@@ -12,6 +12,8 @@ ProjectColor is an application made by Home Depot that allows users to visualize
 
 In order to train and test our models, we used the Large-scale Scene Understanding (LSUN) bedroom image dataset from Kaggle. After downloading the repository, we scraped the images by hand to exclude bedroom scenes without walls. An example of the kinds of images used in our project are below: 
 
+<img src="{{site.baseurl}}/assets/images/bedroom_example.png" width="50%"/>
+
 # Related Works
 - “Home Staging Using Machine Learning Techniques” by Marti Grau Gasulla
   - This research paper discussed using style transfer and other deep learning techniques to modify the style of different bathroom images while retaining objects in the room.
