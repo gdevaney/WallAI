@@ -70,6 +70,15 @@ During experimentation, we attempted 3 methods and used the Home Depot output as
 - Result using PSPNet by Zhao\
 <img src="{{site.baseurl}}/assets/images/bedroom_pspnet.png" width="50%"/>
 
+### Qualitative Analysis
+
+| Method              | Coloration | Edge Detection | Segmentation
+| :---------------- | :------: |  :------: |  :------: |
+| Python Hat        | :------: |  :------: |  :------: |
+| SQL Hat           |   Empty   | Empty   | Empty   |
+| Codecademy Tee    |  Empty   | Empty   | Empty   |
+| Codecademy Hoodie |  Empty   | Empty   | Empty   |
+
 
 # What's Next
 - We want to investigate whether conducting fine-tuning with a subset of the dataset from ADE20K, with only wall annotation, can improve the performance of the models (April 10th)
