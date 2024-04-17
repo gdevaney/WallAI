@@ -13,7 +13,7 @@ Home Depot's ProjectColor Example
 
 In order to train and test our models, we used the ADE20K bedroom segmented image dataset. After downloading the repository, we scraped the images by hand to exclude bedroom scenes with impurities (text, log cabins, etc.) and aggregate the human generated wall segments into a mask. An example of the kinds of images used in our project are below: 
 
-<img src="{{site.baseurl}}/assets/images/bedroom_mask_example.png" width="50%"/>
+<img src="{{site.baseurl}}/assets/images/bedroom_mask_example.png" width="100%"/>
 
 Using the training data, image segmentation models, and edge detection techniques, we will craft a solution that will hopefully outperform Home Depot in wall detection and recoloration.
 
