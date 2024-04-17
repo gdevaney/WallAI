@@ -34,6 +34,14 @@ different pyramid scales, where the highest level captures the global context, w
 
 # Methods/Approach
 
+Given the limited hand annotated resource regarding wall segmentation task, we plan to conduct multiple rounds of qualitative analysis on our models and come up with the best model to compare against Home Depot's Project Color.
+The qualitative metrics that we utilize to assess the quality of the wall painted outputs from different models are coloration, edge detection, and segmenatation, with each score ranging from 1 to 5 [^1].
+Coloration quantifies how similar the lighting of new painted walls are when compared to the original image.
+Edge detection score estimates how well the painted walls draw out the original edges within the original image.
+Segmentation score
+
+[^1]: Score 1 indicates very bad, Score 2 indicates major errors, Score 3 indicates minor errors, Score 4 inidcates minimal errors that cannot be detected easily, and Score 5 indicates almost perfect coloration, edge detection, and segementation score respectively
+
 ### Home Depot Model
 The Home Depot model is proprietary, so we are unable to understand what is used under the hood. However, we will use this as a baseline for scoring our models. Quantitatively, we will use Mean Intersection over Union to compare our outputs to Home Depot's using a similarity metric. Then, we will use human interpretation to score the best model against Home Depot's model qualitatively on three metrics: segmentation, edge detection, and coloration. 
 
