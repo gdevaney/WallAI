@@ -79,6 +79,12 @@ During experimentation, we attempted 3 methods and used the Home Depot output as
 | Codecademy Tee    |  Empty   | Empty   | Empty   |
 | Codecademy Hoodie |  Empty   | Empty   | Empty   |
 
+### Quantitative Analysis
+
+| Method              | Precision | Recall | F1 | IOU
+| Segmentation | 0.87 | 0.83 | 0.85 | 0.74 | 
+| PSPNet | 0.77 | 0.86 | 0.81 | 0.67 | 
+
 
 # What's Next
 - We want to investigate whether conducting fine-tuning with a subset of the dataset from ADE20K, with only wall annotation, can improve the performance of the models (April 10th)
