@@ -90,7 +90,7 @@ This function uses bitwise operations to combine original image with the recolor
 
 Per the example below, you can see how the edges defined by OpenCV techniques snap the segmentation model pixel predictions to actual edges within the photo for a more precise solution. 
 <img src="{{site.baseurl}}/assets/images/masking_example.png" width="100%"/> \
-Blue Region: Semantic Segmentation prediction; Lines: Canny edge detector, Dots: Sampled points for recoloration
+(**Left** Blue Region: Semantic Segmentation prediction; Lines: Canny edge detector, Dots: Sampled points for recoloration) (**Right** Image with wall color replaced by Hidden Sea Glass)
 
 ### Home Depot Model
 The Home Depot model is proprietary, so we are unable to understand what is used under the hood.
