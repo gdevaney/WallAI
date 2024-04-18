@@ -39,7 +39,7 @@ Painting the walls is another challenge after segmenting the image correctly as 
 
 # Methods/Approach
 
-<img src="{{site.baseurl}}/assets/images/diagram.drawio.png" width="200%"/>
+<img src="{{site.baseurl}}/assets/images/diagram.drawio.png" width="150%"/>
 
 
 Given the limited hand annotated resource regarding wall segmentation task, we plan to conduct multiple rounds consisting of qualitative and quantitative analysis on our models and come up with the best model to compare against Home Depot's Project Color.
