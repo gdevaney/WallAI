@@ -15,7 +15,7 @@ In order to train and test our models, we used the ADE20K bedroom segmented imag
 
 <img src="{{site.baseurl}}/assets/images/bedroom_mask_example.png" width="100%"/>
 
-Using the training data, image segmentation models, and edge detection techniques, we will craft a solution that will hopefully outperform Home Depot in wall detection and recoloration.
+Using the training data, pretrained image segmentation models, and edge detection techniques, we demonstrate a solution that competes with Home Depot in wall detection and recoloration.
 
 # Related Works
 In computer vision, the utilization of large-scale datasets like ImageNet [1] and Pascal [2] has been instrumental in propelling the field forward.
@@ -34,8 +34,8 @@ This network uses ResNet to get features and then uses a pyramid pooling module 
 The pyramid pooling module fuses features under four different pyramid scales, where the highest level captures the global context, while the lowest level captures more fine-grained context.
 This context-aware model takes into consideration what objects are associated with which, e.g. boat is the object usually associated with water, not a car.
 Similarly, PSPNet could be used to take into consideration that a wall is an object that is to be associated indoors.
-Our work plans to leverage the human-annotated dataset and pretrained models trained on lots of data to create models that specifically detects and paints walls.
-Painting the walls is another challenge after segmenting the image correctly as there are multiple aspects to consider to color image naturally.
+Our work plans to leverage the human-annotated dataset, pretrained models trained on lots of data, and computer vision techniques to create models that specifically detect and paint walls.
+Wall recoloration is another challenge after segmenting the image correctly, as there are multiple aspects to consider when naturally coloring images.
 
 # Methods/Approach
 
