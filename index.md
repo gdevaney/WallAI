@@ -73,34 +73,32 @@ OpenCV has a number of edge detection and masking modules that can be used for f
 We used techniques outlined in Garga's work to input an image and a color of choice, apply a masking technique using interpolation, a Canny edge detector, and several OpenCV modules to identify the wall, and edit the HSV color space to recolor wall segments while preserving natural light.
 We've highlighted a few key functions below for use of OpenCV during image manipulation:
 
-\textbf{1. getColoredImage()}
+**1. getColoredImage()**
 This function input the bedroom image and target color, converted the image and target color to HSV, replaced the hue and saturation values of the original image with the target values, then converted the image back to RGB. 
 
-\textbf{2. getOutlineImage()}
+**2. getOutlineImage()**
 This function uses a gaussian blur and Canny edge detector to find and mark edges within the image. We used this for both the original image and the Semantic Segmentation output mask to refine edges and provide boundaries for color filling. 
 
-\textbf{3. getSamples()}
+**3. getSamples()**
 This function sampled predicted wall pixels from Semantic Segmentation model outputs to use in follow on methods for color-filling operations. We put barriers in place to filter sampled pixels that were located in central points of predicted walls. 
 
-\textbf{4. selectWall()}
+**4. selectWall()**
 This function creates the mask used for color-filling by leveraging OpenCV's floodFill function. By combining the outline image with the pixel samples, floodFill creates a mask by filling in bounded regions of the sampled pixels with an opposing color to other parts of the image.
 
-\textbf{5. mergeImages()}
+**5. mergeImages()**
 This function uses bitwise operations to combine original image with the recolored image at regions specified by the wall mask created in function 4.
 
-
+Per the example below, you can see how the edges defined by OpenCV techniques snap the segmentation model pixel predictions to actual edges within the photo for a more precise solution. 
 <img src="{{site.baseurl}}/assets/images/masking_example.png" width="100%"/> \
 Blue Region: Semantic Segmentation prediction; Lines: Canny edge detector, Dots: Sampled points for recoloration
 
 ### Home Depot Model
 The Home Depot model is proprietary, so we are unable to understand what is used under the hood.
-However, we will use this as a baseline for scoring our models.
-Qualitatively, we will use human interpretation on three metrics mentioned above and conduct error analysis.
-Then, we will use quantitave evaluation using Mean Intersection over Union to compare outputs to Home Depot's using similarity metrics.
+However, we used this to compete with our model through human interpretation on three metrics defined above and quantitave evaluation using Mean Intersection over Union.
 
 
 # Experiments/Results
-During experimentation, we attempted 3 methods and used the Home Depot output as a baseline.
+We conducted 2 major experiments to refine our WallAI product. First, we compared the two pretrained models to determine which was best for segmentation. Next, we utilized the more accurate model to guide our computer vision techniques in wall segmentation and coloration. 
 Using the 3 qualitative metrics outlined above on one particular instance shown below, Zhou's model perfoms best in segmentation, and OpenCV performs best at edge detection and coloration.
 While our baseline didn't perform best at any one category, it combined accurate coloration with segmentation and object detection, unlike the OpenCV.
 We experimented with thresholding the Canny edge detector and found that a large threshold range (45,225) outperformed a smaller range.
@@ -110,8 +108,8 @@ The quality of images taken by consumers varies, and using a large threshold ran
 
 ### Qualitative Analysis
 We conduct human evaluation on 100 images from ADE20K to score how well each model detects different objects within the images.
-Among the three qualitative analysis, only the segmentation score is relevant as these models at this stage just filled the pixels with the same color.
-Looking into how semantic segmentation model by Zhou was performing bettyer than PSPNet, we noticed that Zhou's model handels different depths of walls within the same image very well.
+Among the three qualitative analysis, only the segmentation score is relevant, as the models at this stage only filled the pixels with a uniform color.
+Looking into why the semantic segmentation model by Zhou was performing better than PSPNet, we noticed that Zhou's model handles different depths of walls within the same image very well.
 In contrast, PSPNet had issues when there were doors open within the image and walls behind the door.
 Furthermore, PSPNet exhibited limitations in discerning patterned walls and exhibited suboptimal performance in scenarios where disparate walls within an image exhibited varying colors- a challenge not encountered by the initial model.
 A drawback of Zhou's model was its propensity to over-paint, resulting in false positives.
@@ -144,7 +142,7 @@ These quantitative metrics corroborate our qualitative observations, affirming t
 ## Experiment 2: OpenCV infused Semantic Segmentation vs. Home Depot
 
 ### Qualitative Analysis
-Next, we analyze our newly proposed ensembled model, which combies the Canny Edge Detector with a pretrained Semantic Segmentation network, and the model deployed by Home Depot.
+Next, we analyze our newly proposed ensembled model, which combines the Canny Edge Detector with a pretrained Semantic Segmentation network, and the model deployed by Home Depot.
 To evaluate their performance, we ran the experiments on 100 unseen data from the 'tensorflow/lsun/bedroom' dataset.
 For each model, we assessed the models across multiple dimension: coloration, edge detection, and segmentation, utilizing a rating scale ranging from 1 to 5.
 Our qualitative analysis reveal distinct strengths and weaknesses inherent to each model.
@@ -175,15 +173,17 @@ Our model outperforming Home Depot
 
 ### Quantitative Analysis
 
-When conducting quantitative analysis, we utilize different reference image used for IOU ground truth.
-By merging precision-focused coloration strategies with ground truth masks, we hoped that our ensemble model prioritizes accurate wall segmentation while minimizing coloration errors in non-wall regions.
+When conducting quantitative analysis, we reverted back to the ADE20K data and it's annotations to compute Accuracy, Precision, Recall, and F1 scores.
 We could not calculate metrics for comparison against Home Depots model other than IOU because Home Depot does not export masks used to guide recoloration.
-This study not only advances wall segmentation accuracy but also underscores the significance of precision in coloration techniques as we did not want to color over areas which were not walls, just to improve recall.
-Integrating OpenCV allowed us to do that without sacrificing accuracy.
+In order to evaluate IOU, we used getColoredImage() and the annotated ADE20K masks to fill the image with the new color and create a "ground truth".
+By merging precision-focused coloration strategies with ground truth masks, we hoped that our ensemble model prioritized accurate wall segmentation while minimizing coloration errors in non-wall regions. 
 
-| Method              | Accuracy | Precision | Recall | F1 | IOU
+This study not only advances wall segmentation accuracy but also underscores the significance of precision in coloration techniques as we did not want to color over areas which were not walls, just to improve recall.
+Integrating OpenCV allowed us to do this without sacrificing accuracy.
+
+| Method              | Accuracy | Precision | Recall | F1 | IOU |
 | Segmentation | 0.91 | 0.82 | 0.92 | 0.87 | NA |
-| Segmentation + OpenCV| 0.91 | 0.88 | 0.83 | 0.85 | 0.988 | 
+| Segmentation + OpenCV| 0.92 | 0.88 | 0.85 | 0.86 | 0.988 | 
 | HomeDepot | NA | NA | NA | NA | 0.985 |
 
 # Conclusion
@@ -193,16 +193,23 @@ Before embarking on this project, our collective assumption rested on the notion
 However, we learned the pivotal role of quality data.
 We came to understand that the mere abundance of data is insufficient; rather it is the quality of data that truly matters.
 By "good data," we refer to datasets meticulously annotated by domain experts, rather than relying solely on crowdsourced annotations.
-This emphasiss on expert-driven annotation ensures incorporation of meaningful information into the dataset.
+This emphasis on expert-driven annotation ensures incorporation of meaningful information into the dataset.
 Armed with such high-quality data, we made a really simple model to perform pretty well against one made by Home Depot.
 
 ## Challenges Encountered
-We explored if a recent unsupervised semantic segmentation model, like Hamilton's work [6], can be integrated to our problem.
+We explored a recent study introducing unsupervised semantic segmentation models [6], and assumed it could be integrated to our problem.
 Because the paper had promising results, we delve into it before evaluating the feasibility of their model to our task.
-Our task of coloring a wall mandates some type of classification for wall, and the only way to make unsupervised model detect for walls is to manually annotate for walls given their output, and train again.
-We did not have enough time nor resources to pursue this, so subsequently made sweeping assumptions about the dataset to bypass this step.
-We told the model that walls should be the biggest segment among all the segments or the segment should only straight lines, but these assumptions made the model perform worse. 
+Our task of coloring a wall mandates some type of classification for wall segments, and the only way to make unsupervised models detect walls is to manually annotate walls given their output and train again.
+We did not have enough time nor resources to pursue this, so we subsequently made sweeping assumptions about the dataset to bypass this step.
+We experimented with rigorous segment selection all the segments and forcing the model to only consider straight lines, but these assumptions made the model perform worse. 
 If we were to start this project again, we would explore other options that can make our supervised semantic segmentation models better.
+
+## Contributions
+
+| Team Member              | Task |
+| Jongyoon Choi | Data Preparation, PSPNet, Quantitative Analysis |
+| Garrett Devaney | Data Prepatation, OpenCV, Quantitative Analysis | 
+| Jeongrok Yu | Data Preparation, SemanticSegmentation, Qualitative Analysis |
 
 # References
 
