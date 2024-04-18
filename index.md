@@ -153,8 +153,10 @@ In addition, the runtime of Home Depot's model is 5 times longer than our ensemb
 | OpenCV infused Semantic Segmentation    |  3.71   | 3.72   | 4.09   |
 | Home Depot |   3.24   | 3.74   | 4.4   |
 
+
 <img src="{{site.baseurl}}/assets/images/home_depot_bad.png" width="100%"/> \
 Home Depot outperforming our model
+
 
 <img src="{{site.baseurl}}/assets/images/home_depot_good.png" width="100%"/> \
 Our model outperforming Home Depot
