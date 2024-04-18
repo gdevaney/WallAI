@@ -39,7 +39,8 @@ Painting the walls is another challenge after segmenting the image correctly as 
 
 # Methods/Approach
 
-## TODO: Add the diagram!
+<img src="{{site.baseurl}}/assets/images/diagram.drawio.png" width="48%"/>
+
 
 Given the limited hand annotated resource regarding wall segmentation task, we plan to conduct multiple rounds consisting of qualitative and quantitative analysis on our models and come up with the best model to compare against Home Depot's Project Color.
 The qualitative metrics that we utilize to assess the quality of the wall painted outputs from different models are coloration, edge detection, and segmenatation, with each score ranging from 1 to 5 [^1].
