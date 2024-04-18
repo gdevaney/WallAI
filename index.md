@@ -6,7 +6,7 @@ description: Image Segmentation and Recoloration
 
 
 # Introduction
-ProjectColor is an application made by Home Depot that allows users to visualize different paint colors after they take a picture of their room. The Home Depot app has some difficulty detecting edges and assigning appropriate pixels to what it defines as “walls”. The application also has difficulty detecting light exposure and applying appropriate color transformations (the example below likely does not translate to what the color would actually look like on the wall). We will attempt to solve these problems using Machine Learning and Computer Vision techniques.
+ProjectColor is an application made by Home Depot that allows users to visualize different paint colors after they take a picture of their room. The Home Depot app has some difficulty detecting edges and assigning appropriate pixels to what it defines as “walls”. The application also has difficulty detecting light exposure and applying appropriate color transformations (the exampl below likely does not translate to what the color would actually look like on the wall). We will attempt to solve these problems using Machine Learning and Computer Vision techniques.
 
 <img src="{{site.baseurl}}/assets/images/hd_example.png" width="100%"/> \
 Home Depot's ProjectColor Example
@@ -39,7 +39,7 @@ Wall recoloration is another challenge after segmenting the image correctly, as 
 
 # Methods/Approach
 
-<img src="{{site.baseurl}}/assets/images/diagram.drawio.png" width="150%"/>
+<img src="{{site.baseurl}}/assets/images/cv_diagram.drawio.png" width="150%"/>
 
 
 Given the limited hand annotated resource regarding wall segmentation task, we plan to conduct multiple rounds consisting of qualitative and quantitative analysis on our models and come up with the best model to compare against Home Depot's Project Color.
@@ -52,7 +52,10 @@ If the paint covers up the edges of the original room, the image is going to loo
 Segmentation score evaluates how well models segment different objects within the image, such as ceilings, bed frames, windows, and etc.
 We determined that these qualitative metrics can be subjective, so in order to maintain consistency througout the entire experiments, we only had one annotator conducting the evaluation.
 
-For the quantitative analysis, we leverage the annotations from ADE20K dataset and calculate precision, recall, F1, and Intersection over Union score for two of our semantic segmentation models [3]. After conducting error analysis on the segmentation, we ensemble the edge detection algorithm with two of our segmentation models and run the experiments again on a different dataset, 'tensorflow/lsun/bedroom'. With the two new models and dataset, we finally compare the results quantitatively and qualitatively with Home Depot's result. We concluded, through qualitative and quantitative analysis, that our ensembled model best paints the walls given an indoor image.
+For the quantitative analysis, we leverage the annotations from ADE20K dataset and calculate precision, recall, F1, and Intersection over Union score for two of our semantic segmentation models [3].
+After conducting error analysis on the segmentation, we ensemble the edge detection algorithm with two of our segmentation models and run the experiments again.
+With the two new models, we compare the results quantitatively and qualitatively with Home Depot's result.
+We concluded, through qualitative and quantitative analysis, that our ensembled model best paints the walls given an indoor image.
 
 [^1]: Score 1 indicates very bad, Score 2 indicates major errors, Score 3 indicates minor errors, Score 4 inidcates minimal errors that cannot be detected easily, and Score 5 indicates almost perfect coloration, edge detection, and segementation score respectively
 
@@ -123,7 +126,6 @@ Additionally, neither model demonstrated robustness in detecting walls at variou
 <img src="{{site.baseurl}}/assets/images/Screenshot 2024-03-26 at 00.04.52.png" width="40%"/> \
 Semantic Segmentation Output
 
-
 <img src="{{site.baseurl}}/assets/images/bedroom_pspnet.png" width="40%"/> \
 PSPNet Output
 
@@ -143,7 +145,7 @@ These quantitative metrics corroborate our qualitative observations, affirming t
 
 ### Qualitative Analysis
 Next, we analyze our newly proposed ensembled model, which combines the Canny Edge Detector with a pretrained Semantic Segmentation network, and the model deployed by Home Depot.
-To evaluate their performance, we ran the experiments on 100 unseen data from the 'tensorflow/lsun/bedroom' dataset.
+To evaluate their performance, we ran the experiments on 100 augmented data from the ADE20k dataset.
 For each model, we assessed the models across multiple dimension: coloration, edge detection, and segmentation, utilizing a rating scale ranging from 1 to 5.
 Our qualitative analysis reveal distinct strengths and weaknesses inherent to each model.
 
@@ -208,7 +210,7 @@ If we were to start this project again, we would explore other options that can 
 
 | **Team Member**              | **Task** |
 | Jongyoon Choi | Data Preparation, PSPNet, Quantitative Analysis |
-| Garrett Devaney | Data Prepatation, OpenCV, Quantitative Analysis | 
+| Garrett Devaney | Data Prepatation, OpenCV, Ensemble Method, Quantitative Analysis |
 | Jeongrok Yu | Data Preparation, SemanticSegmentation, Qualitative Analysis |
 
 # References
