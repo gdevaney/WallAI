@@ -45,40 +45,52 @@ Wall recoloration is another challenge after segmenting the image correctly, as 
 Given the limited hand annotated resource regarding wall segmentation task, we plan to conduct multiple rounds consisting of qualitative and quantitative analysis on our models and come up with the best model to compare against Home Depot's Project Color.
 The qualitative metrics that we utilize to assess the quality of the wall painted outputs from different models are coloration, edge detection, and segmenatation, with each score ranging from 1 to 5 [^1].
 
-Coloration quantifies how similar the lighting of new painted walls are when compared to the original image.
-Painting the walls considering different lighting is essential especially because walls are adjacent to multiple light sources within our dataset such as sunlight from the windows or lamps by the bedside.
-Edge detection score estimates how well the painted walls draw out the original edges within the original image.
-If the paint covers up the edges of the original room, the image is going to look awkward.
-Segmentation score evaluates how well different models segment different objects within the image such as ceiling, bed frames, window, and etc.
+Coloration quantifies how similar the lighting of newly painted walls compares to the original image.
+Lighting considerations are essential because walls are adjacent to multiple light sources within our dataset, such as sunlight from the windows or lamps by the bedside.
+Edge detection score estimates how well the painted walls draw out the edges within the original image.
+If the paint covers up the edges of the original room, the image is going to look unnatural.
+Segmentation score evaluates how well models segment different objects within the image, such as ceilings, bed frames, windows, and etc.
 We determined that these qualitative metrics can be subjective, so in order to maintain consistency througout the entire experiments, we only had one annotator conducting the evaluation.
 
-For the quantitative analysis, we leverage the annotations from ADE20K dataset and calculate precision, recall, F1, and Intersection over Union score for two of our semantic segmentation models [3]. After conducting error analysis on the segmentation, we ensemble edge detection algorithm with two of our segmentation models and run the experiments again on a different dataset, 'tensorflow/lsun/bedroom'. With the two new models and dataset, we finally compare the results quantitatively and qualitatively with Home Depot's result. We concluded, through qualitative and quantitative analysis, that our ensembled model best paints the walls given an indoor image.
+For the quantitative analysis, we leverage the annotations from ADE20K dataset and calculate precision, recall, F1, and Intersection over Union score for two of our semantic segmentation models [3]. After conducting error analysis on the segmentation, we ensemble the edge detection algorithm with two of our segmentation models and run the experiments again on a different dataset, 'tensorflow/lsun/bedroom'. With the two new models and dataset, we finally compare the results quantitatively and qualitatively with Home Depot's result. We concluded, through qualitative and quantitative analysis, that our ensembled model best paints the walls given an indoor image.
 
 [^1]: Score 1 indicates very bad, Score 2 indicates major errors, Score 3 indicates minor errors, Score 4 inidcates minimal errors that cannot be detected easily, and Score 5 indicates almost perfect coloration, edge detection, and segementation score respectively
-
-### OpenCV Module
-OpenCV has a number of edge detection and masking modules that can be used for filtering objects in images [5]
-We used techniques outlined in Garga's work to input an image and a color of choice, apply a masking technique using interpolation, a Canny edge detector, and several OpenCV modules to identify the wall, and edit the HSV color space to recolor wall segments while preserving natural light.
-The OpenCV approach performed well at handling various light intensities, but struggled to identify and segment walls with deep shadows and fine details.
-Therefore, we wanted to explore techniques using semantic segmentation and potentially combine the two approaches to create our final product. 
-
-Notes: Utilized Canny edge detector to refine edges predicted by models. Used model outputs to sample points from predicted wall masks for FloodFill function to properly fill out wall. Combined Canny edge detector from original image and edges of model predictions to refine points. 
-
-<img src="{{site.baseurl}}/assets/images/masking_example.png" width="100%"/> \
-Blue Area: Semantic Segmentation prediction; Lines: Canny edge detector, Dots: Sampled points for recoloration
 
 ### Semantic Segmentation CNN Models
 Semantic Segmentation is a computer vision task that assigns a semantic label to each partitioned segment.
 Unlike instance segmentation, where the goal is to differentiate between individual object instances, semantic segmentation focuses on categorizing each pixel in the image into meaningful classes, such as road, sky, person, car, or wall.
 The primary objective of semantic segmentation is to understand the content of the image at the pixel level, enabling machines to interpret the scene with a higher level of understanding.
 
-We propose to utilize semantic segmentation models to distinguish walls within our dataset and subsequently color the walls.
+We utilized semantic segmentation models to distinguish walls within our dataset for subsequent coloration.
 We integrate a pre-trained model from Zhou's work [3]: ResNET50Dilated [6] as the encoder and PPM-Deepsup as the decoder of the semantic segmentation model, which is widely used as a starting point for evaluating deep learning semantic segmentation models.
 
-The next model we try is using PSPNet to identify just the walls.
-The model would use ResNet50, a 50-layer convolutional neural network (CNN), for encoding and pyramid scheme parsing network for decoding, which exploits global context information by different-region-based context aggregation.
-We decided on this model because ResNet is great for semantic segmentation, and pyramid scheme parsing network is great for identifying the object at different scale: taking in a global context of the image at a highest level to deduce the object relation to one another within an image, and also taking in more fine-grained context at continuously lower levels.
-We believed this model would be great for our use case since walls are only present within an indoor image, and there most likely is a piece of furniture or a bed next to a wall.
+The next model we evaluated was PSPNet to strictly identify the walls.
+The model used ResNet50, a 50-layer convolutional neural network (CNN), for encoding and pyramid scheme parsing network for decoding, which exploits global context information by different-region-based context aggregation.
+We decided on this model because ResNet is great for semantic segmentation, and pyramid scheme parsing network is great for identifying the object at scale: ingesting global context of the image at a highest level to deduce objects' relation to one another within an image, and also taking in more fine-grained context at continuously lower levels.
+
+### OpenCV Module
+OpenCV has a number of edge detection and masking modules that can be used for filtering objects in images [5]
+We used techniques outlined in Garga's work to input an image and a color of choice, apply a masking technique using interpolation, a Canny edge detector, and several OpenCV modules to identify the wall, and edit the HSV color space to recolor wall segments while preserving natural light.
+We've highlighted a few key functions below for use of OpenCV during image manipulation:
+
+\textbf{1. getColoredImage()}
+This function input the bedroom image and target color, converted the image and target color to HSV, replaced the hue and saturation values of the original image with the target values, then converted the image back to RGB. 
+
+\textbf{2. getOutlineImage()}
+This function uses a gaussian blur and Canny edge detector to find and mark edges within the image. We used this for both the original image and the Semantic Segmentation output mask to refine edges and provide boundaries for color filling. 
+
+\textbf{3. getSamples()}
+This function sampled predicted wall pixels from Semantic Segmentation model outputs to use in follow on methods for color-filling operations. We put barriers in place to filter sampled pixels that were located in central points of predicted walls. 
+
+\textbf{4. selectWall()}
+This function creates the mask used for color-filling by leveraging OpenCV's floodFill function. By combining the outline image with the pixel samples, floodFill creates a mask by filling in bounded regions of the sampled pixels with an opposing color to other parts of the image.
+
+\textbf{5. mergeImages()}
+This function uses bitwise operations to combine original image with the recolored image at regions specified by the wall mask created in function 4.
+
+
+<img src="{{site.baseurl}}/assets/images/masking_example.png" width="100%"/> \
+Blue Region: Semantic Segmentation prediction; Lines: Canny edge detector, Dots: Sampled points for recoloration
 
 ### Home Depot Model
 The Home Depot model is proprietary, so we are unable to understand what is used under the hood.
