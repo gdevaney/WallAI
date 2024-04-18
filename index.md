@@ -181,7 +181,7 @@ By merging precision-focused coloration strategies with ground truth masks, we h
 This study not only advances wall segmentation accuracy but also underscores the significance of precision in coloration techniques as we did not want to color over areas which were not walls, just to improve recall.
 Integrating OpenCV allowed us to do this without sacrificing accuracy.
 
-| **Method**              | **Accuracy** | **Precision** | **Recall** | **F1** | IOU** |
+| **Method**              | **Accuracy** | **Precision** | **Recall** | **F1** | **IOU** |
 | Segmentation | 0.91 | 0.82 | 0.92 | 0.87 | NA |
 | Segmentation + OpenCV| 0.92 | 0.88 | 0.85 | 0.86 | 0.988 | 
 | HomeDepot | NA | NA | NA | NA | 0.985 |
