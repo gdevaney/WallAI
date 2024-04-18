@@ -146,7 +146,7 @@ These quantitative metrics corroborate our qualitative observations, affirming t
 ### Qualitative Analysis
 Next, we analyze our newly proposed ensembled model, which combines the Canny Edge Detector with a pretrained Semantic Segmentation network, and the model deployed by Home Depot.
 To evaluate their performance, we ran the experiments on 100 augmented data from the ADE20k dataset.
-For each model, we assessed the models across multiple dimension: coloration, edge detection, and segmentation, utilizing a rating scale ranging from 1 to 5.
+For each model, we assessed the models across multiple dimensions: coloration, edge detection, and segmentation, utilizing a rating scale ranging from 1 to 5.
 Our qualitative analysis reveal distinct strengths and weaknesses inherent to each model.
 
 Home Depot's model exhibits remarkable proficiency in identifying minute objects within the background, consistently achieving segmentation scores of 4 or 5.
