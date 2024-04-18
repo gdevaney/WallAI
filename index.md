@@ -165,11 +165,11 @@ In addition, the runtime of Home Depot's model is 5 times longer than our ensemb
 
 
 <img src="{{site.baseurl}}/assets/images/home_depot_bad.png" width="100%"/> \
-Home Depot outperforming our model
+Home Depot (left) outperforming our model (right)
 
 
 <img src="{{site.baseurl}}/assets/images/home_depot_good.png" width="100%"/> \
-Our model outperforming Home Depot
+Our model (right) outperforming Home Depot (left)
 
 ### Quantitative Analysis
 
