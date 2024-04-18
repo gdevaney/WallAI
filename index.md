@@ -78,6 +78,7 @@ During experimentation, we attempted 3 methods and used the Home Depot output as
 <img src="{{site.baseurl}}/assets/images/Screenshot 2024-03-26 at 00.04.52.png" width="40%"/> \
 Semantic Segmentation Output
 
+
 <img src="{{site.baseurl}}/assets/images/bedroom_pspnet.png" width="40%"/> \
 PSPNet Output
 
