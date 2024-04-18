@@ -175,7 +175,7 @@ Our model (right) outperforming Home Depot (left)
 
 ### Quantitative Analysis
 
-When conducting quantitative analysis, we reverted back to the ADE20K data and it's annotations to compute Accuracy, Precision, Recall, and F1 scores.
+When conducting quantitative analysis, we used the ADE20K data and it's annotations to compute Accuracy, Precision, Recall, and F1 scores.
 We could not calculate metrics for comparison against Home Depots model other than IOU because Home Depot does not export masks used to guide recoloration.
 In order to evaluate IOU, we used getColoredImage() and the annotated ADE20K masks to fill the image with the new color and create a "ground truth".
 By merging precision-focused coloration strategies with ground truth masks, we hoped that our ensemble model prioritized accurate wall segmentation while minimizing coloration errors in non-wall regions. 
