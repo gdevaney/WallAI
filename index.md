@@ -116,7 +116,7 @@ A drawback of Zhou's model was its propensity to over-paint, resulting in false 
 Additionally, neither model demonstrated robustness in detecting walls at various angles.
 
 
-| Method              | Coloration | Edge Detection | Segmentation
+| **Method              | Coloration | Edge Detection | Segmentation** |
 | Semantic Segmentation (Zhou)|   1   | 1   | 3.65  |
 | PSPNet    |  1   | 1   | 2.97   |
 
@@ -135,7 +135,7 @@ The results show that Semantic Segmentation model has a higher score for precisi
 These quantitative metrics corroborate our qualitative observations, affirming the efficacy of Zhou's Semantic Segmentation model in accurately delineating walls within images when compared to PSPNet.
 
 
-| Method              | Precision | Recall | F1 | IOU
+| **Method              | Precision | Recall | F1 | IOU** |
 | Semantic Segmentation (Zhou) | 0.87 | 0.83 | 0.85 | 0.74 | 
 | PSPNet | 0.77 | 0.86 | 0.81 | 0.67 | 
 
@@ -159,7 +159,7 @@ While Home Depot's model overlooks the presence of multiple light sources in the
 Moreover, the integration of the Canny Edge Detector significantly enhances the clarity of edges in our model's outputs, contributing to improved overall performance in edge detection tasks.
 In addition, the runtime of Home Depot's model is 5 times longer than our ensemble method, which can lead to latency issue when deployed in a real-world application scenario.
 
-| Method              | Coloration | Edge Detection | Segmentation |
+| **Method              | Coloration | Edge Detection | Segmentation** |
 | OpenCV infused Semantic Segmentation    |  3.71   | 3.72   | 4.09   |
 | Home Depot |   3.24   | 3.74   | 4.4   |
 
@@ -181,7 +181,7 @@ By merging precision-focused coloration strategies with ground truth masks, we h
 This study not only advances wall segmentation accuracy but also underscores the significance of precision in coloration techniques as we did not want to color over areas which were not walls, just to improve recall.
 Integrating OpenCV allowed us to do this without sacrificing accuracy.
 
-| Method              | Accuracy | Precision | Recall | F1 | IOU |
+| **Method              | Accuracy | Precision | Recall | F1 | IOU** |
 | Segmentation | 0.91 | 0.82 | 0.92 | 0.87 | NA |
 | Segmentation + OpenCV| 0.92 | 0.88 | 0.85 | 0.86 | 0.988 | 
 | HomeDepot | NA | NA | NA | NA | 0.985 |
@@ -206,7 +206,7 @@ If we were to start this project again, we would explore other options that can 
 
 ## Contributions
 
-| Team Member              | Task |
+| **Team Member              | Task** |
 | Jongyoon Choi | Data Preparation, PSPNet, Quantitative Analysis |
 | Garrett Devaney | Data Prepatation, OpenCV, Quantitative Analysis | 
 | Jeongrok Yu | Data Preparation, SemanticSegmentation, Qualitative Analysis |
