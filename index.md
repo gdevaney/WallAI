@@ -6,7 +6,7 @@ description: Image Segmentation and Recoloration
 
 
 # Introduction
-ProjectColor is an application made by Home Depot that allows users to visualize different paint colors after they take a picture of their room. The Home Depot app has some difficulty detecting edges and assigning appropriate pixels to what it defines as “walls”. The application also has difficulty detecting light exposure and applying appropriate color transformations (the exampl below likely does not translate to what the color would actually look like on the wall). We will attempt to solve these problems using Machine Learning and Computer Vision techniques.
+ProjectColor is an application made by Home Depot that allows users to visualize different paint colors after they take a picture of their room. The Home Depot app has some difficulty detecting edges and assigning appropriate pixels to what it defines as “walls”. The application also has difficulty detecting light exposure and applying appropriate color transformations (the example below likely does not translate to what the color would actually look like on the wall). We will attempt to solve these problems using Machine Learning and Computer Vision techniques.
 
 <img src="{{site.baseurl}}/assets/images/hd_example.png" width="100%"/> \
 Home Depot's ProjectColor Example
