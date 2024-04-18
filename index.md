@@ -74,19 +74,19 @@ We used techniques outlined in Garga's work to input an image and a color of cho
 We've highlighted a few key functions below for use of OpenCV during image manipulation:
 
 **1. getColoredImage()**
-This function input the bedroom image and target color, converted the image and target color to HSV, replaced the hue and saturation values of the original image with the target values, then converted the image back to RGB. 
+input the bedroom image and target color, converted the image and target color to HSV, replaced the hue and saturation values of the original image with the target values, then converted the image back to RGB. 
 
 **2. getOutlineImage()**
-This function uses a gaussian blur and Canny edge detector to find and mark edges within the image. We used this for both the original image and the Semantic Segmentation output mask to refine edges and provide boundaries for color filling. 
+uses a gaussian blur and Canny edge detector to find and mark edges within the image. We used this for both the original image and the Semantic Segmentation output mask to refine edges and provide boundaries for color filling. 
 
 **3. getSamples()**
-This function sampled predicted wall pixels from Semantic Segmentation model outputs to use in follow on methods for color-filling operations. We put barriers in place to filter sampled pixels that were located in central points of predicted walls. 
+sampled predicted wall pixels from Semantic Segmentation model outputs to use in follow on methods for color-filling operations. We put barriers in place to filter sampled pixels that were located in central points of predicted walls. 
 
 **4. selectWall()**
-This function creates the mask used for color-filling by leveraging OpenCV's floodFill function. By combining the outline image with the pixel samples, floodFill creates a mask by filling in bounded regions of the sampled pixels with an opposing color to other parts of the image.
+creates the mask used for color-filling by leveraging OpenCV's floodFill function. By combining the outline image with the pixel samples, floodFill creates a mask by filling in bounded regions of the sampled pixels with an opposing color to other parts of the image.
 
 **5. mergeImages()**
-This function uses bitwise operations to combine original image with the recolored image at regions specified by the wall mask created in function 4.
+uses bitwise operations to combine original image with the recolored image at regions specified by the wall mask created in function 4.
 
 Per the example below, you can see how the edges defined by OpenCV techniques snap the segmentation model pixel predictions to actual edges within the photo for a more precise solution. 
 <img src="{{site.baseurl}}/assets/images/masking_example.png" width="100%"/> \
