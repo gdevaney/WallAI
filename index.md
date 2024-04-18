@@ -51,6 +51,7 @@ OpenCV has a number of edge detection and masking modules that can be used for f
 Notes: Utilized Canny edge detector to refine edges predicted by models. Used model outputs to sample points from predicted wall masks for FloodFill function to properly fill out wall. Combined Canny edge detector from original image and edges of model predictions to refine points. 
 
 <img src="{{site.baseurl}}/assets/images/masking_example.png" width="100%"/> \
+Blue Area: Semantic Segmentation prediction; Lines: Canny edge detector, Dots: Sampled points for recoloration
 
 ### Semantic Segmentation CNN Models
 Semantic Segmentation is a computer vision task that assigns a semantic label to each partitioned segment.
@@ -73,6 +74,12 @@ During experimentation, we attempted 3 methods and used the Home Depot output as
 ## Experiment 1: Semantic Segmentation vs. PSPNet 
 
 ### Qualitative Analysis
+
+<img src="{{site.baseurl}}/assets/images/Screenshot 2024-03-26 at 00.04.52.png" width="40%"/> \
+Semantic Segmentation Output
+
+<img src="{{site.baseurl}}/assets/images/bedroom_pspnet.png" width="40%"/> \
+PSPNet Output
 
 | Method              | Coloration | Edge Detection | Segmentation
 | :---------------- | :------: |  :------: |  :------: |
