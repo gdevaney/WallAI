@@ -48,6 +48,10 @@ The Home Depot model is proprietary, so we are unable to understand what is used
 ### OpenCV Module
 OpenCV has a number of edge detection and masking modules that can be used for filtering objects in images [5]. We used techniques outlined in Garga's work to input an image and a color of choice, apply a masking technique using interpolation, a Canny edge detector, and several OpenCV modules to identify the wall, and edit the HSV color space to recolor wall segments while preserving natural light. The OpenCV approach performed well at handling various light intensities, but struggled to identify and segment walls with deep shadows and fine details. Therefore, we wanted to explore techniques using semantic segmentation and potentially combine the two approaches to create our final product. 
 
+Notes: Utilized Canny edge detector to refine edges predicted by models. Used model outputs to sample points from predicted wall masks for FloodFill function to properly fill out wall. Combined Canny edge detector from original image and edges of model predictions to refine points. 
+
+<img src="{{site.baseurl}}/assets/images/masking_example.png" width="100%"/> \
+
 ### Semantic Segmentation CNN Models
 Semantic Segmentation is a computer vision task that assigns a semantic label to each partitioned segment.
 Unlike instance segmentation, where the goal is to differentiate between individual object instances, semantic segmentation focuses on categorizing each pixel in the image into meaningful classes, such as road, sky, person, car, or wall.
@@ -64,19 +68,9 @@ Lastly, we propose to make use of only a subset of ADE20K indoor images to fine-
 
 
 # Experiments/Results
-During experimentation, we attempted 3 methods and used the Home Depot output as a baseline. Using the 3 qualitative metrics outlined above on one particular instance shown below, Zhou's model perfoms best in segmentation, and OpenCV performs best at edge detection and coloration. While our baseline didn't perform best at any one category, it combined accurate coloration with segmentation and object detection, unlike the OpenCV. We experimented with thresholding the Canny edge detector and found that a large threshold range (50,200) outperformed a smaller range. The quality of images taken by consumers varies, and using a large threshold range forces the model to be picky choosing pixels in the edge map, yet generous to pixels connected to those in the edge map. We hope to effectively combine this technique with image segmentation models in future experiments. 
+During experimentation, we attempted 3 methods and used the Home Depot output as a baseline. Using the 3 qualitative metrics outlined above on one particular instance shown below, Zhou's model perfoms best in segmentation, and OpenCV performs best at edge detection and coloration. While our baseline didn't perform best at any one category, it combined accurate coloration with segmentation and object detection, unlike the OpenCV. We experimented with thresholding the Canny edge detector and found that a large threshold range (45,225) outperformed a smaller range. The quality of images taken by consumers varies, and using a large threshold range forces the model to be picky choosing pixels in the edge map, yet generous to pixels connected to those in the edge map. 
 
-- Home Depot baseline\
-<img src="{{site.baseurl}}/assets/images/hd_recolor1.jpg" width="50%"/>
-
-- Result using OpenCV modules\
-<img src="{{site.baseurl}}/assets/images/opencv_test.jpg" width="50%"/>
-
-- Result using pre-trained model from Zhou\
-<img src="{{site.baseurl}}/assets/images/Screenshot 2024-03-26 at 00.04.52.png" width="50%"/>
-
-- Result using PSPNet by Zhao\
-<img src="{{site.baseurl}}/assets/images/bedroom_pspnet.png" width="50%"/>
+## Experiment 1: Semantic Segmentation vs. PSPNet 
 
 ### Qualitative Analysis
 
@@ -93,6 +87,31 @@ During experimentation, we attempted 3 methods and used the Home Depot output as
 | Segmentation | 0.87 | 0.83 | 0.85 | 0.74 | 
 | PSPNet | 0.77 | 0.86 | 0.81 | 0.67 | 
 
+## Experiment 2: OpenCV infused Semantic Segmentation vs. Home Depot
+
+### Qualitative Analysis
+
+| Method              | Coloration | Edge Detection | Segmentation
+| :---------------- | :------: |  :------: |  :------: |
+| Python Hat        | :------: |  :------: |  :------: |
+| SQL Hat           |   Empty   | Empty   | Empty   |
+| Codecademy Tee    |  Empty   | Empty   | Empty   |
+| Codecademy Hoodie |  Empty   | Empty   | Empty   |
+
+<img src="{{site.baseurl}}/assets/images/home_depot_bad.png" width="100%"/> \
+Home Depot outperforming our model
+
+<img src="{{site.baseurl}}/assets/images/home_depot_good.png" width="100%"/> \
+Our model outperforming Home Depot
+
+### Quantitative Analysis
+
+Different reference image used for IOU ground truth. Combined coloration technique with ground truth mask of image. Could not calculate metrics for comparison against home depots model other than IOU because Home Depot does not export masks used to guide recoloration. 
+
+| Method              | Accuracy | Precision | Recall | F1 | IOU
+|Segmentation | 0.91 | 0.82 | 0.92 | 0.87 | NA |
+| Segmentation + OpenCV| 0.91 | 0.88 | 0.83 | 0.85 | 0.988 | 
+| HomeDepot | NA | NA | NA | NA | 0.985 | 
 
 # What's Next
 - We want to investigate whether conducting fine-tuning with a subset of the dataset from ADE20K, with only wall annotation, can improve the performance of the models (April 10th)
