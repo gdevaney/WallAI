@@ -114,7 +114,7 @@ Our model outperforming Home Depot
 
 ### Quantitative Analysis
 
-Different reference image used for IOU ground truth. Combined coloration technique with ground truth mask of image. Could not calculate metrics for comparison against home depots model other than IOU because Home Depot does not export masks used to guide recoloration. 
+Different reference image used for IOU ground truth. Combined coloration technique with ground truth mask of image. Could not calculate metrics for comparison against home depots model other than IOU because Home Depot does not export masks used to guide recoloration. Our goal was to maximize precision because we didn't want to color over areas which were not walls. OpenCV allowed us to do that without sacrificing accuracy. 
 
 | Method              | Accuracy | Precision | Recall | F1 | IOU
 |Segmentation | 0.91 | 0.82 | 0.92 | 0.87 | NA |
