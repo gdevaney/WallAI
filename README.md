@@ -45,9 +45,6 @@ Wall recoloration is another challenge after segmenting the image correctly, as 
 
 ## Methods
 
-<img src="assets/images/cv_diagram.drawio.png" width="150%"/>
-
-
 Given the limited hand annotated resource regarding wall segmentation task, multiple rounds of qualitative and quantitative analysis were performed to determine the best model to compare against Home Depot's Project Color.
 The qualitative metrics used to assess the quality of the wall painted outputs from different models are coloration, edge detection, and segmenatation, with each score ranging from 1 to 5 [^1].
 
