@@ -14,12 +14,12 @@ description: Image Segmentation and Recoloration
 # Introduction
 ProjectColor is an application made by Home Depot that allows users to visualize different paint colors after they take a picture of their room. The Home Depot app has some difficulty detecting edges and assigning appropriate pixels to what it defines as “walls”. The application also has difficulty detecting light exposure and applying appropriate color transformations (the example below likely does not translate to what the color would actually look like on the wall). We will attempt to solve these problems using Machine Learning and Computer Vision techniques.
 
-<img src="{{site.baseurl}}/assets/images/hd_example.png" width="100%"/> \
+<img src="assets/images/hd_example.png" width="100%"/> \
 Home Depot's ProjectColor Example
 
 In order to train and test our models, we used the ADE20K bedroom segmented image dataset. After downloading the repository, we scraped the images by hand to exclude bedroom scenes with impurities (text, log cabins, etc.) and aggregate the human generated wall segments into a mask. An example of the kinds of images used in our project are below: 
 
-<img src="{{site.baseurl}}/assets/images/bedroom_mask_example.png" width="100%"/>
+<img src="assets/images/bedroom_mask_example.png" width="100%"/>
 
 Using the training data, pretrained image segmentation models, and edge detection techniques, we demonstrate a solution that competes with Home Depot in wall detection and recoloration.
 
