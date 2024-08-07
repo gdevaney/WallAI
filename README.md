@@ -81,7 +81,7 @@ Per the example below, you can see how the edges defined by OpenCV techniques sn
 
 ### Home Depot Model
 The Home Depot model is proprietary, so I was unable to understand what is used under the hood.
-However, I used this to compete with our model through human interpretation on three metrics defined above and quantitave evaluation using Mean Intersection over Union.
+However, I used this to compete with mymodel through human interpretation on three metrics defined above and quantitave evaluation using Mean Intersection over Union.
 
 # Experiments/Results
 Using the 3 qualitative metrics outlined above on one particular instance shown below, Zhou's model perfoms best in segmentation, and OpenCV performs best at edge detection and coloration.
@@ -99,9 +99,11 @@ A drawback of Zhou's model was its propensity to over-paint, resulting in false 
 Additionally, neither model demonstrated robustness in detecting walls at various angles.
 
 
-| **Method**              | **Coloration** | **Edge Detection** | **Segmentation** |
-| Semantic Segmentation (Zhou)|   1   | 1   | 3.65  |
-| PSPNet    |  1   | 1   | 2.97   |
+| **Method**                   | **Coloration** | **Edge Detection** | **Segmentation** |
+|------------------------------|----------------|--------------------|------------------|
+| Semantic Segmentation (Zhou) | 1              | 1                  | 3.65             |
+| PSPNet                       | 1              | 1                  | 2.97             |
+
 
 <img src="assets/images/Screenshot 2024-03-26 at 00.04.52.png" width="40%"/> \
 Semantic Segmentation Output
@@ -111,15 +113,17 @@ PSPNet Output
 
 
 ### Quantitative Analysis
-I sought to validate our qualitative findings through quantitative analysis.
+I sought to validate qualitative findings through quantitative analysis.
 To this end, I computed precision, recall, F1 score, and Intersection over Union (IOU) metrics for both models' wall segmentation performance using the ADE20K dataset.
 The results show that Semantic Segmentation model has a higher score for precision, F1, and IOU.
 These quantitative metrics corroborate qualitative observations, affirming the efficacy of Zhou's Semantic Segmentation model in accurately delineating walls within images when compared to PSPNet.
 
 
-| **Method**              | **Precision** | **Recall** | **F1** | **IOU** |
-| Semantic Segmentation (Zhou) | 0.87 | 0.83 | 0.85 | 0.74 | 
-| PSPNet | 0.77 | 0.86 | 0.81 | 0.67 | 
+| **Method**                   | **Precision** | **Recall** | **F1** | **IOU** |
+|------------------------------|---------------|------------|--------|---------|
+| Semantic Segmentation (Zhou) | 0.87          | 0.83       | 0.85   | 0.74    |
+| PSPNet                       | 0.77          | 0.86       | 0.81   | 0.67    |
+
 
 ## Experiment 2: OpenCV infused Semantic Segmentation vs. Home Depot
 
@@ -137,34 +141,38 @@ Furthermore, it occasionally misidentifies the ceiling and exhibitis a tendency 
 My model outperforms Home Depot's model in terms of color fidelity and edge detection capabilities.
 A notable distinction lies in the treatment of multiple light sources within the scene.
 While Home Depot's model overlooks the presence of multiple light sources in the majority of its outputs, my ensemble model accurately captures and reflects all light sources present in the original image.
-Moreover, the integration of the Canny Edge Detector significantly enhances the clarity of edges in our model's outputs, contributing to improved overall performance in edge detection tasks.
-In addition, the runtime of Home Depot's model is 5 times longer than our ensemble method, which can lead to latency issue when deployed in a real-world application scenario.
+Moreover, the integration of the Canny Edge Detector significantly enhances the clarity of edges in the model's outputs, contributing to improved overall performance in edge detection tasks.
+In addition, the runtime of Home Depot's model is 5 times longer than my ensemble method, which can lead to latency issue when deployed in a real-world application scenario.
 
-| **Method**              | **Coloration** | **Edge Detection** | **Segmentation** |
-| OpenCV infused Semantic Segmentation    |  3.71   | 3.72   | 4.09   |
-| Home Depot |   3.24   | 3.74   | 4.4   |
+| **Method**                       | **Coloration** | **Edge Detection** | **Segmentation** |
+|----------------------------------|----------------|--------------------|------------------|
+| OpenCV infused Semantic Segmentation | 3.71           | 3.72               | 4.09             |
+| Home Depot                       | 3.24           | 3.74               | 4.4              |
+
 
 
 <img src="assets/images/home_depot_bad.png" width="100%"/> \
-Home Depot (left) outperforming our model (right)
+Home Depot (left) outperforming my model (right)
 
 
 <img src="assets/images/home_depot_good.png" width="100%"/> \
-Our model (right) outperforming Home Depot (left)
+My model (right) outperforming Home Depot (left)
 
 ### Quantitative Analysis
 
 When conducting quantitative analysis, I used the ADE20K data and it's annotations to compute Accuracy, Precision, Recall, and F1 scores.
 I could not calculate metrics for comparison against Home Depots model other than IOU because Home Depot does not export masks used to guide recoloration.
 In order to evaluate IOU, I used getColoredImage() and the annotated ADE20K masks to fill the image with the new color and create a "ground truth".
-By merging precision-focused coloration strategies with ground truth masks, I hoped that our ensemble model prioritized accurate wall segmentation while minimizing coloration errors in non-wall regions. 
+By merging precision-focused coloration strategies with ground truth masks, I hoped that my ensemble model prioritized accurate wall segmentation while minimizing coloration errors in non-wall regions. 
 
 This study not only advances wall segmentation accuracy but also underscores the significance of precision in coloration techniques. I did not want to color over areas which were not walls just to improve recall, and integration of OpenCV techniques achieved this goal without sacrificing accuracy.
 
-| **Method**              | **Accuracy** | **Precision** | **Recall** | **F1** | **IOU** |
-| Segmentation | 0.91 | 0.82 | 0.92 | 0.87 | NA |
-| Segmentation + OpenCV| 0.92 | 0.88 | 0.85 | 0.86 | 0.988 | 
-| HomeDepot | NA | NA | NA | NA | 0.985 |
+| **Method**                   | **Accuracy** | **Precision** | **Recall** | **F1** | **IOU** |
+|------------------------------|--------------|---------------|------------|--------|---------|
+| Segmentation                 | 0.91         | 0.82          | 0.92       | 0.87   | NA      |
+| Segmentation + OpenCV        | 0.92         | 0.88          | 0.85       | 0.86   | 0.988   |
+| HomeDepot                    | NA           | NA            | NA         | NA     | 0.985   |
+
 
 
 # References
