@@ -7,7 +7,7 @@ ProjectColor is an application made by Home Depot that allows users to visualize
 <img src="assets/images/hd_example.png" width="100%"/> \
 Home Depot's ProjectColor Example
 
-In order to train and test our models, I used the ADE20K bedroom segmented image dataset. After downloading the repository, I scraped the images by hand to exclude bedroom scenes with impurities (text, log cabins, etc.) and aggregate the human generated wall segments into a mask. An example of the kinds of images used in this project are below: 
+In order to train and test the models, I used the ADE20K bedroom segmented image dataset. After downloading the repository, I scraped the images by hand to exclude bedroom scenes with impurities (text, log cabins, etc.) and aggregate the human generated wall segments into a mask. An example of the kinds of images used in this project are below: 
 
 <img src="assets/images/bedroom_mask_example.png" width="100%"/>
 
